@@ -2,13 +2,15 @@ package Lab1;
 public class GaussSeidel {
 	
 	private double[][] matrix;
+	private double[] vectorB;
 	private double approx;
 	private int dimention;
 
-	public GaussSeidel(int dimention, double approx, double[][] matrix) {
+	public GaussSeidel(int dimention, double approx, double[][] matrix, double[] vectorB) {
 		this.matrix = matrix;
 		this.approx = approx;
 		this.dimention = dimention;
+		this.vectorB = vectorB;
 	}
 	
 	public boolean isDiagonalDominance() {

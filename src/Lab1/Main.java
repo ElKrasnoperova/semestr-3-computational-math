@@ -3,8 +3,11 @@ public class Main {
 	public static void main(String args[]) {
 		FileWorker matrixInfo = new FileWorker();
 		
-		GaussSeidel gaussSeidel = new GaussSeidel(matrixInfo.getMatrixSize(),
+		GaussSeidel gaussSeidel = new GaussSeidel(
+				matrixInfo.getMatrixSize(),
 				matrixInfo.getApproximation(),
-				matrixInfo.getMatrix());
+				matrixInfo.getMatrix(),
+				matrixInfo.getVectorB()
+				);
 	}
 }

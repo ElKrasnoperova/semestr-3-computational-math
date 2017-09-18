@@ -8,6 +8,7 @@ public class FileWorker {
 	private int dimention;
 	private double approximation;
 	private double[][] matrix;
+	private double[] vectorB;
 
 	private static final File file = new File ("input.txt");
 	
@@ -20,7 +21,12 @@ public class FileWorker {
 			return;
 		}
 		dimention = scanner.nextInt();
+		vectorB = new double[dimention];
 		matrix = new double[dimention][dimention];
+		for (int i = 0; i < dimention; i++) {
+			vectorB[i] = scanner.nextDouble();
+		}
+		
 		for (int i = 0; i < dimention; i++) {
 			for (int j = 0; j < dimention; j++) {
 				matrix[i][j] = scanner.nextDouble();
@@ -39,6 +45,10 @@ public class FileWorker {
 	
 	public double[][] getMatrix() {
 		return matrix;
+	}
+	
+	public double[] getVectorB() {
+		return vectorB;
 	}
 	
 }
