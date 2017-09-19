@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 
-public class FileWorker {
+class FileWorker {
 	private int dimension;
 	private double approximation;
 	private double[][] matrix;
@@ -12,7 +12,7 @@ public class FileWorker {
 
 	private static final File file = new File ("input.txt");
 	
-	public FileWorker() {
+	FileWorker() {
 		Scanner scanner;
 		try {
 			scanner = new Scanner(file);
@@ -35,19 +35,19 @@ public class FileWorker {
 		approximation = scanner.nextDouble();
 	}
 	
-	public int getMatrixSize() {
+	int getMatrixSize() {
 		return dimension;
 	}
 	
-	public double getApproximation() {
+	double getApproximation() {
 		return approximation;
 	}
 	
-	public double[][] getMatrix() {
+	double[][] getMatrix() {
 		return matrix;
 	}
 	
-	public double[] getVectorB() {
+	double[] getVectorB() {
 		return vectorB;
 	}
 	

@@ -16,7 +16,7 @@ public class GaussSeidel {
 	 * @param matrix Input matrix
 	 * @param vectorB Column of right-hand sides
 	 */
-	public GaussSeidel(int dimension, double approx, double[][] matrix, double[] vectorB) {
+	GaussSeidel(int dimension, double approx, double[][] matrix, double[] vectorB) {
 		this.matrix = matrix;
 		this.approx = approx;
 		this.dimension = dimension;
@@ -29,7 +29,7 @@ public class GaussSeidel {
 	 * Check diagonal dominance in the input matrix
 	 * @return "True" for matrix with diagonal dominance, "false" for others
 	 */
-	public boolean isDiagonalDominance() {
+	private boolean isDiagonalDominance() {
 		double absDiagonalElement = 0;
 		double absSumLineElements = 0;
 		for (int i = 0; i < dimension; i++) {
@@ -40,7 +40,6 @@ public class GaussSeidel {
 			}
 			
 			if (absDiagonalElement < absSumLineElements) {
-				System.out.println(absDiagonalElement + " " + absSumLineElements);
 				changeMatrixRows(i);
 				return false;
 			}
@@ -52,7 +51,7 @@ public class GaussSeidel {
 	 * Change matrix rows
 	 * @param row Row without diagonal dominance
 	 */
-	public void changeMatrixRows(int row) {
+	private void changeMatrixRows(int row) {
 		int newRow = row + 1;
 		if (row == dimension - 1) {
 			newRow = 0;
@@ -65,7 +64,7 @@ public class GaussSeidel {
 	/**
 	 * Solve linear system of equations
 	 */
-	public void solve() {
+	void solve() {
 		if (!isDiagonalDominance()) {
 			System.out.println("Matrix isn't diagonal dominance");
 		}
