@@ -5,6 +5,9 @@ public class GaussSeidel {
 	private double[] vectorB;
 	private double approx;
 	private int dimension;
+	private double[] solution;
+	private double[] initApproximation;
+	private int k = 0;
 
 	/**
 	 *
@@ -18,6 +21,8 @@ public class GaussSeidel {
 		this.approx = approx;
 		this.dimension = dimension;
 		this.vectorB = vectorB;
+		this.solution = new double[dimension];
+		this.initApproximation = new double[dimension];
 	}
 
 	/**
@@ -59,21 +64,17 @@ public class GaussSeidel {
 
 	/**
 	 * Solve linear system of equations
-	 * @return Array of results
 	 */
-	public double[] solver() {
+	public void solve() {
 		if (!isDiagonalDominance()) {
 			System.out.println("Matrix isn't diagonal dominance");
 		}
 		int flag = 0;
-		double[] solution = new double[dimension];
-		double[] initApproximation = new double[dimension];
 
 		for (int i = 0; i < dimension; i++) {
 			initApproximation[i] = 0;
 		}
 
-		int k = 0;
 		while (flag != dimension) {
 			flag = 0;
 			k++;
@@ -92,7 +93,20 @@ public class GaussSeidel {
 				}
 			}
 		}
-		return solution;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder output = new StringBuilder();
+		output.append("Results: " );
+		for (double x: solution){
+			output.append(x + " ");
+		}
+		output.append("\n" + "Iterations: " + k + "\n" + "Approximations column: ");
+		for (int i = 0; i < dimension; i++) {
+			output.append((Math.abs(solution[i] - initApproximation[i]) + " "));
+		}
+		return output.toString();
 	}
 
 }

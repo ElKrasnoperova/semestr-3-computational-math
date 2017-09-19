@@ -9,7 +9,7 @@ public class Main {
 				matrixInfo.getMatrix(),
 				matrixInfo.getVectorB()
 				);
-		gaussSeidel.solver();
-
+		gaussSeidel.solve();
+		System.out.println(gaussSeidel);
 	}
 }
