@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 
 public class FileWorker {
-	private int dimention;
+	private int dimension;
 	private double approximation;
 	private double[][] matrix;
 	private double[] vectorB;
@@ -20,15 +20,15 @@ public class FileWorker {
 			e.printStackTrace();
 			return;
 		}
-		dimention = scanner.nextInt();
-		vectorB = new double[dimention];
-		matrix = new double[dimention][dimention];
-		for (int i = 0; i < dimention; i++) {
+		dimension = scanner.nextInt();
+		vectorB = new double[dimension];
+		matrix = new double[dimension][dimension];
+		for (int i = 0; i < dimension; i++) {
 			vectorB[i] = scanner.nextDouble();
 		}
 		
-		for (int i = 0; i < dimention; i++) {
-			for (int j = 0; j < dimention; j++) {
+		for (int i = 0; i < dimension; i++) {
+			for (int j = 0; j < dimension; j++) {
 				matrix[i][j] = scanner.nextDouble();
 			}
 		}
@@ -36,7 +36,7 @@ public class FileWorker {
 	}
 	
 	public int getMatrixSize() {
-		return dimention;
+		return dimension;
 	}
 	
 	public double getApproximation() {
