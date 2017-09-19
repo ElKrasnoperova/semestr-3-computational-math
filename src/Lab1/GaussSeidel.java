@@ -21,7 +21,7 @@ public class GaussSeidel {
 	}
 
 	/**
-	 * Method for checking diagonal dominance in the input matrix
+	 * Check diagonal dominance in the input matrix
 	 * @return "True" for matrix with diagonal dominance, "false" for others
 	 */
 	public boolean isDiagonalDominance() {
@@ -36,6 +36,7 @@ public class GaussSeidel {
 			
 			if (absDiagonalElement < absSumLineElements) {
 				System.out.println(absDiagonalElement + " " + absSumLineElements);
+				changeMatrixRows(i);
 				return false;
 			}
 		}
@@ -43,7 +44,7 @@ public class GaussSeidel {
 	}
 
 	/**
-	 * Method for changing matrix rows
+	 * Change matrix rows
 	 * @param row Row without diagonal dominance
 	 */
 	public void changeMatrixRows(int row) {
@@ -56,12 +57,42 @@ public class GaussSeidel {
 		matrix[newRow] = temporary;
 	}
 
-	public void printMatrix() {
-		for (int i = 0; i < dimension; i++) {
-			for (int j = 0; j < dimension; j++) {
-				System.out.print(matrix[i][j] + " ");
-			}
-			System.out.println();
+	/**
+	 * Solve linear system of equations
+	 * @return Array of results
+	 */
+	public double[] solver() {
+		if (!isDiagonalDominance()) {
+			System.out.println("Matrix isn't diagonal dominance");
 		}
+		int flag = 0;
+		double[] solution = new double[dimension];
+		double[] initApproximation = new double[dimension];
+
+		for (int i = 0; i < dimension; i++) {
+			initApproximation[i] = 0;
+		}
+
+		int k = 0;
+		while (flag != dimension) {
+			flag = 0;
+			k++;
+			for (int i = 0; i < dimension; i++) {
+				double presolution = vectorB[i];
+				for (int n = 0; n < dimension; n++) {
+					if (i != n) {
+						presolution -= matrix[i][n] * initApproximation[n];
+					}
+				}
+				solution[i] = (1 / matrix[i][i]) * presolution;
+				if (Math.abs(solution[i] - initApproximation[i]) > approx) {
+					initApproximation[i] = solution[i];
+				} else {
+					flag++;
+				}
+			}
+		}
+		return solution;
 	}
+
 }
