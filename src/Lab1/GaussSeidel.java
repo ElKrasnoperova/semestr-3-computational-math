@@ -35,11 +35,33 @@ public class GaussSeidel {
 			}
 			
 			if (absDiagonalElement < absSumLineElements) {
-				System.out.println(absDiagonalElement + " " + absSumLineElements );
+				System.out.println(absDiagonalElement + " " + absSumLineElements);
 				return false;
 			}
 		}
 		return true;
 	}
-	
+
+	/**
+	 * Method for changing matrix rows
+	 * @param row Row without diagonal dominance
+	 */
+	public void changeMatrixRows(int row) {
+		int newRow = row + 1;
+		if (row == dimension - 1) {
+			newRow = 0;
+		}
+		double[] temporary = matrix[row];
+		matrix[row] = matrix[newRow];
+		matrix[newRow] = temporary;
+	}
+
+	public void printMatrix() {
+		for (int i = 0; i < dimension; i++) {
+			for (int j = 0; j < dimension; j++) {
+				System.out.print(matrix[i][j] + " ");
+			}
+			System.out.println();
+		}
+	}
 }
