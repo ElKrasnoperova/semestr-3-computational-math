@@ -36,6 +36,7 @@ public class Main {
 			}
 			System.out.println("Input approximation");
 			approx = scanner.nextDouble();
+			scanner.close();
 		}
 		else {
 			System.out.println("You've written the wrong flag.");
