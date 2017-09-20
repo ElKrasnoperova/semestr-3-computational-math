@@ -6,8 +6,8 @@ public class GaussSeidel {
 	private double approx;
 	private int dimension;
 	private double[] solution;
-	private double[] initApproximation;
-	private int k = 0;
+	private double[] previousIteration;
+	private int iteration = 0;
 
 	/**
 	 *
@@ -22,7 +22,7 @@ public class GaussSeidel {
 		this.dimension = dimension;
 		this.vectorB = vectorB;
 		this.solution = new double[dimension];
-		this.initApproximation = new double[dimension];
+		this.previousIteration = new double[dimension];
 	}
 
 	/**
@@ -71,22 +71,22 @@ public class GaussSeidel {
 		int flag = 0;
 
 		for (int i = 0; i < dimension; i++) {
-			initApproximation[i] = 0;
+			previousIteration[i] = 0;
 		}
 
 		while (flag != dimension) {
 			flag = 0;
-			k++;
+			iteration++;
 			for (int i = 0; i < dimension; i++) {
 				double presolution = vectorB[i];
 				for (int n = 0; n < dimension; n++) {
 					if (i != n) {
-						presolution -= matrix[i][n] * initApproximation[n];
+						presolution -= matrix[i][n] * previousIteration[n];
 					}
 				}
 				solution[i] = (1 / matrix[i][i]) * presolution;
-				if (Math.abs(solution[i] - initApproximation[i]) > approx) {
-					initApproximation[i] = solution[i];
+				if (Math.abs(solution[i] - previousIteration[i]) > approx) {
+					previousIteration[i] = solution[i];
 				} else {
 					flag++;
 				}
@@ -97,13 +97,13 @@ public class GaussSeidel {
 	@Override
 	public String toString() {
 		StringBuilder output = new StringBuilder();
-		output.append("Results: " );
+		output.append("Results: " + "\t\t\t   " );
 		for (double x: solution){
 			output.append(x + " ");
 		}
-		output.append("\n" + "Iterations: " + k + "\n" + "Approximations column: ");
+		output.append("\n" + "Iterations: \t\t\t" + iteration + "\n" + "Approximations column:  ");
 		for (int i = 0; i < dimension; i++) {
-			output.append((Math.abs(solution[i] - initApproximation[i]) + " "));
+			output.append((Math.abs(solution[i] - previousIteration[i]) + " "));
 		}
 		return output.toString();
 	}

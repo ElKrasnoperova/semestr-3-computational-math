@@ -1,5 +1,8 @@
 package Lab1;
-
+//TODO 3 signs
+//TODO output with the table
+//TODO incorrect data in random
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -9,7 +12,7 @@ public class Main {
 		double[] vectorB;
 		double[][] matrix;
 
-		System.out.println("Do you want to input data from keyboard[0] or from file[1]?");
+		System.out.println("Do you want to input data from keyboard[0] or from file[1] or random[2]?");
 		Scanner scanner = new Scanner(System.in);
 		int flag = scanner.nextInt();
 
@@ -37,6 +40,25 @@ public class Main {
 			System.out.println("Input approximation");
 			approx = scanner.nextDouble();
 			scanner.close();
+		}
+		else if(flag == 2){
+			Random random = new Random();
+			dimension = random.nextInt(20);
+			System.out.println(dimension);
+			approx = 0.01;
+			vectorB = new double[dimension];
+			matrix = new double[dimension][dimension];
+			for (int i = 0; i <dimension; i++) {
+				vectorB[i] = Math.random();
+			}
+			for (int i = 0; i < dimension; i++) {
+				for (int j = 0; j < dimension; j++) {
+					matrix[i][j] = Math.random();
+				}
+			}
+
+
+
 		}
 		else {
 			System.out.println("You've written the wrong flag.");
