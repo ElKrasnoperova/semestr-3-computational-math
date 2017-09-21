@@ -1,5 +1,4 @@
 package Lab1;
-//TODO 3 signs
 //TODO output with the table
 //TODO incorrect data in random
 import java.util.Random;

@@ -1,4 +1,7 @@
 package Lab1;
+
+import java.text.DecimalFormat;
+
 public class GaussSeidel {
 	
 	private double[][] matrix;
@@ -96,14 +99,16 @@ public class GaussSeidel {
 
 	@Override
 	public String toString() {
+		String pattern = "##0.000";
+		DecimalFormat decimalFormat = new DecimalFormat(pattern);
 		StringBuilder output = new StringBuilder();
 		output.append("Results: " + "\t\t\t   " );
 		for (double x: solution){
-			output.append(x + " ");
+			output.append(decimalFormat.format(x) + " ");
 		}
 		output.append("\n" + "Iterations: \t\t\t" + iteration + "\n" + "Approximations column:  ");
 		for (int i = 0; i < dimension; i++) {
-			output.append((Math.abs(solution[i] - previousIteration[i]) + " "));
+			output.append(decimalFormat.format((Math.abs(solution[i] - previousIteration[i]))) + " ");
 		}
 		return output.toString();
 	}
