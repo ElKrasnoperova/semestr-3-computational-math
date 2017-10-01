@@ -21,6 +21,7 @@ public class Main {
 			vectorB = matrixInfo.getVectorB();
 			matrix = matrixInfo.getMatrix();
 			approx = matrixInfo.getApproximation();
+
 		} else if (flag == 0){
 			System.out.println("Input matrix size ");
 			dimension = scanner.nextInt();

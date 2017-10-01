@@ -1,6 +1,7 @@
 package Lab1;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 public class GaussSeidel {
 	
@@ -11,6 +12,7 @@ public class GaussSeidel {
 	private double[] solution;
 	private double[] previousIteration;
 	private int iteration = 0;
+	private int row;
 
 	/**
 	 *
@@ -30,7 +32,7 @@ public class GaussSeidel {
 
 	/**
 	 * Check diagonal dominance in the input matrix
-	 * @return "True" for matrix with diagonal dominance, "false" for others
+	 * @return "True" for input matrix with diagonal dominance, "false" for others
 	 */
 	private boolean isDiagonalDominance() {
 		double absDiagonalElement = 0;
@@ -41,9 +43,7 @@ public class GaussSeidel {
 			for (int j = 0; j < dimension; j++) {
 				absSumLineElements +=  Math.abs(matrix[i][j]);
 			}
-			
 			if (absDiagonalElement < absSumLineElements) {
-				changeMatrixRows(i);
 				return false;
 			}
 		}
@@ -51,25 +51,67 @@ public class GaussSeidel {
 	}
 
 	/**
-	 * Change matrix rows
-	 * @param row Row without diagonal dominance
+	 * For checking is it possible to make matrix diagonal dominance
+	 * @return List of new position for rows (or null)
 	 */
-	private void changeMatrixRows(int row) {
-		int newRow = row + 1;
-		if (row == dimension - 1) {
-			newRow = 0;
+	private ArrayList<Integer> getNewPositionsForRows() {
+		double element;
+		double elementsSum;
+		ArrayList<Integer> newPositionsForRows = new ArrayList<>();
+		for (int i = 0; i < dimension; i++) {
+			for (int j = 0; j < dimension; j++) {
+				element = Math.abs(matrix[i][j]);
+				elementsSum = -matrix[i][j];
+				for (int k = 0; k < dimension; k++) {
+					elementsSum += Math.abs(matrix[i][k]);
+				}
+				if (element > elementsSum) {
+					if (!newPositionsForRows.contains(j)) {
+						newPositionsForRows.add(i, j);
+					}
+					else {
+						return null;
+					}
+				}
+			}
 		}
-		double[] temporary = matrix[row];
-		matrix[row] = matrix[newRow];
-		matrix[newRow] = temporary;
+		for (Integer x: newPositionsForRows) {
+			if (x == null) {
+				System.out.println("No diagonal");
+				return null;
+			}
+		}
+		return newPositionsForRows;
 	}
+
+	/**
+	 * Make matrix diagonal dominance
+	 * @param newPositionsForLine List of new position for rows
+	 */
+	private void makeDiagonalDominance(ArrayList<Integer> newPositionsForLine) {
+		double[][] newMatrix = new double[dimension][dimension];
+		double[] newVectorB = new double[dimension];
+		for (int i = 0; i < dimension; i++) {
+			newMatrix[i] = matrix[newPositionsForLine.get(i)];
+			newVectorB[i] = vectorB[newPositionsForLine.get(i)];
+		}
+		matrix = newMatrix;
+		vectorB = newVectorB;
+	}
+
 
 	/**
 	 * Solve linear system of equations
 	 */
 	void solve() {
 		if (!isDiagonalDominance()) {
-			System.out.println("Matrix isn't diagonal dominance");
+			System.out.println("Initial matrix isn't diagonal dominance");
+			ArrayList<Integer> newPositionsForRows = getNewPositionsForRows();
+			if (newPositionsForRows != null) {
+				makeDiagonalDominance(newPositionsForRows);
+			} else {
+				System.out.println("Matrix can't be diagonal dominance");
+			}
 		}
 		int flag = 0;
 
@@ -96,6 +138,7 @@ public class GaussSeidel {
 			}
 		}
 	}
+
 
 	@Override
 	public String toString() {
