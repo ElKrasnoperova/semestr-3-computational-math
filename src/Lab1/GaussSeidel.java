@@ -57,7 +57,7 @@ public class GaussSeidel {
 	private ArrayList<Integer> getNewPositionsForRows() {
 		double element;
 		double elementsSum;
-		ArrayList<Integer> newPositionsForRows = new ArrayList<>();
+		ArrayList<Integer> newPositionsForRows = new ArrayList<>(dimension);
 		for (int i = 0; i < dimension; i++) {
 			for (int j = 0; j < dimension; j++) {
 				element = Math.abs(matrix[i][j]);
@@ -67,6 +67,7 @@ public class GaussSeidel {
 				}
 				if (element > elementsSum) {
 					if (!newPositionsForRows.contains(j)) {
+//						System.out.println(j);
 						newPositionsForRows.add(i, j);
 					}
 					else {
