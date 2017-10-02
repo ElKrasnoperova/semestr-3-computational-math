@@ -12,7 +12,6 @@ public class GaussSeidel {
 	private double[] solution;
 	private double[] previousIteration;
 	private int iteration = 0;
-	private int row;
 
 	/**
 	 *

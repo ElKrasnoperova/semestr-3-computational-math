@@ -2,6 +2,12 @@ package Lab1;
 
 public class Utils {
 
+    /**
+     * Printing input data
+     * @param approx Allowable error
+     * @param vectorB Column of right-hand sides
+     * @param matrix Input matrix
+     */
     public static void printInitDataForGaussSeidel(double approx, double[] vectorB, double[][] matrix) {
         int dimension = vectorB.length;
         System.out.println("Approximation: " + approx);
