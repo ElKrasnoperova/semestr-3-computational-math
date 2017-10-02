@@ -1,7 +1,4 @@
 package Lab1;
-//TODO output with the table
-//TODO incorrect data in random
-import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -80,6 +77,7 @@ public class Main {
 				);
 
 		gaussSeidel.solve();
+		System.out.println();
 		System.out.println(gaussSeidel);
 	}
 }

@@ -67,7 +67,6 @@ public class GaussSeidel {
 				}
 				if (element > elementsSum) {
 					if (!newPositionsForRows.contains(j)) {
-//						System.out.println(j);
 						newPositionsForRows.add(i, j);
 					}
 					else {
