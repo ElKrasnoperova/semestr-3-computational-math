@@ -50,7 +50,7 @@ public class Main {
 				dimension = scanner.nextInt();
 			}
 
-			approx = Math.random();
+			approx = Math.random()/100;
 			vectorB = new double[dimension];
 			matrix = new double[dimension][dimension];
 			double sum;
@@ -69,15 +69,22 @@ public class Main {
 			return;
 		}
 		Utils.printInitDataForGaussSeidel(approx, vectorB, matrix);
-		GaussSeidel gaussSeidel = new GaussSeidel(
-				dimension,
-				approx,
-				matrix,
-				vectorB
-				);
+		if(Utils.isMatrixElementsEquals(dimension, matrix)) {
+			System.out.println("All elements are equal");
+			return;
+		} else {
+			GaussSeidel gaussSeidel = new GaussSeidel(
+					dimension,
+					approx,
+					matrix,
+					vectorB
+			);
 
-		gaussSeidel.solve();
-		System.out.println();
-		System.out.println(gaussSeidel);
+			gaussSeidel.solve();
+			System.out.println();
+			System.out.println(gaussSeidel);
+			return;
+		}
 	}
+
 }

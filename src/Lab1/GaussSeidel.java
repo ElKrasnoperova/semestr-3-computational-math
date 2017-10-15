@@ -110,6 +110,7 @@ public class GaussSeidel {
 				makeDiagonalDominance(newPositionsForRows);
 			} else {
 				System.out.println("Matrix can't be diagonal dominance");
+				return;
 			}
 		}
 		int flag = 0;
